@@ -1,0 +1,27 @@
+- Simulator
+    - Simulator class
+    - Message transmission
+        Don't use raw bytes, simplify by wrapping in objects and allow receivers to pattern match them (or something like that)
+    - Nodes and algorithms for nodes to execute
+        Should this be two separate things or should I keep them as linked ideas
+    - Logging
+    - Network behaviours
+        - Reliable links - message received iff it is sent. Might be reordered
+        - Fair-loss links - messages might be lost, duplicated or reordered but will eventually get through
+        - Arbitrary links - messages might be altered
+    - Node behaviours
+        - Crash-stop
+        - Crash-recovery
+    - Timing behaviours for messages
+        - Synchronous - latency no greater than known upper bound
+        - Partially-synchronous - can become asynchronous for finite but unknown periods of time
+        - Asynchronous - may be delayed for arbitrarily long
+    - Timing behaviours for node execution
+        - Synchronous - nodes execute at known speed
+        - Partially-synchronous - can become asynchronous for finite but unknown periods of time
+        - Asynchronous - execution may be paused for arbitrarily long
+- Speeding-up and slowing-down simulation
+    Don't use real time, have a virtual time thing
+- Example distributed database system
+- Raft algorithm
+- Graphical interface? (probably not)
