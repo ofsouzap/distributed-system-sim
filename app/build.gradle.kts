@@ -26,7 +26,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("distributed.system.sim.App")
+    mainClass.set("com.github.ofsouzap.distributedsystemsim.App")
 }
 
 tasks.named<Test>("test") {
