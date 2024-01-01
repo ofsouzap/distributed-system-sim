@@ -1,10 +1,11 @@
+- Run tests in workflow
 - Simulator
-    - Simulator class
-    - Message transmission
+    / Simulator class
+    / Message transmission
         Don't use raw bytes, simplify by wrapping in objects and allow receivers to pattern match them (or something like that)
     - Nodes and algorithms for nodes to execute
         Should this be two separate things or should I keep them as linked ideas
-    - Logging
+    / Logging
     - Network behaviours
         - Reliable links - message received iff it is sent. Might be reordered
         - Fair-loss links - messages might be lost, duplicated or reordered but will eventually get through
