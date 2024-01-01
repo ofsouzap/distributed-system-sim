@@ -1,10 +1,9 @@
 package com.github.ofsouzap.distributedsystemsim.simulation.logging;
 
-import com.github.ofsouzap.distributedsystemsim.simulation.MessageDeliveryEvent;
-import com.github.ofsouzap.distributedsystemsim.simulation.MessageTransmission;
 import com.github.ofsouzap.distributedsystemsim.simulation.SimulationContext;
 import com.github.ofsouzap.distributedsystemsim.simulation.messages.Message;
-import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.Node;
+import com.github.ofsouzap.distributedsystemsim.simulation.messages.MessageDeliveryEvent;
+import com.github.ofsouzap.distributedsystemsim.simulation.messages.targets.MessageTarget;
 
 public class ConsoleLogger implements EventLogger {
     @Override
@@ -13,8 +12,8 @@ public class ConsoleLogger implements EventLogger {
     }
 
     @Override
-    public void logMessageTransmitted(SimulationContext context, MessageTransmission tx) {
-        System.out.println("Node [" + tx.getSrc().toString() + "] transmitted message [" + tx.getMsg().toString() + "]");
+    public void logMessageTransmitted(SimulationContext context, Message msg) {
+        System.out.println("Node [" + msg.getSrc().toString() + "] transmitted message [" + msg.toString() + "]");
     }
 
     @Override
@@ -24,12 +23,12 @@ public class ConsoleLogger implements EventLogger {
         + " of message ["
         + messageDelivery.getMessage().toString()
         + "] to node ["
-        + messageDelivery.getDst().toString()
+        + messageDelivery.getIntendedTarget().toString()
         + "]");
     }
 
     @Override
-    public void logMessageReceived(SimulationContext context, Node dst, Message msg) {
-        System.out.println("Node [" + dst.toString() + "] received message [" + msg.toString() + "]");
+    public void logMessageDelivered(SimulationContext context, MessageTarget deliveryTarget, Message msg) {
+        System.out.println("Target [" + deliveryTarget.toString() + "] received message [" + msg.toString() + "]");
     }
 }

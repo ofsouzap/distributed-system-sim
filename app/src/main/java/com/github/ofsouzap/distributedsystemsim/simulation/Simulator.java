@@ -6,6 +6,8 @@ import java.util.Queue;
 import java.util.Set;
 
 import com.github.ofsouzap.distributedsystemsim.simulation.logging.EventLogger;
+import com.github.ofsouzap.distributedsystemsim.simulation.messages.Message;
+import com.github.ofsouzap.distributedsystemsim.simulation.messages.MessageDeliveryEvent;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.Network;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.Node;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.UpdateIntent;
@@ -25,7 +27,7 @@ public class Simulator implements SimulationController {
         this.messageQueue = new PriorityQueue<MessageDeliveryEvent>(new Comparator<MessageDeliveryEvent>() {
             @Override
             public int compare(MessageDeliveryEvent md1, MessageDeliveryEvent md2) {
-                return md1.deliveryTime.compareTo(md2.deliveryTime);
+                return md1.getDeliveryTime().compareTo(md2.getDeliveryTime());
             }
         });
     }
@@ -37,19 +39,21 @@ public class Simulator implements SimulationController {
 
     private void deliverAllNowMessageDeliveries() {
         // Iterate through all messages for this simulation step
-        while (!messageQueue.isEmpty() && messageQueue.peek().deliveryTime == getContext().getTime()) {
+        while (!messageQueue.isEmpty() && messageQueue.peek().getDeliveryTime() == getContext().getTime()) {
             MessageDeliveryEvent messageDelivery = messageQueue.remove(); // Remove the delivery event item
-            messageDelivery.dst.receiveMessage(messageDelivery.message); // Deliver the message
-            this.logger.logMessageReceived(context, messageDelivery.dst, messageDelivery.message);
+
+            messageDelivery.getIntendedTarget().deliverMessage(network, messageDelivery.getMessage());
+
+            this.logger.logMessageDelivered(context, messageDelivery.getIntendedTarget(), messageDelivery.getMessage());
         }
     }
 
     private void handleUpdateIntent(UpdateIntent intent) {
         if (intent == null) { return; }
 
-        if (intent.messageTransmissions != null) {
-            for (MessageTransmission tx : intent.messageTransmissions) {
-                this.transmitMessage(tx);
+        if (intent.messagesToSend != null) {
+            for (Message msg : intent.messagesToSend) {
+                this.transmitMessage(msg);
             }
         }
     }
@@ -72,9 +76,9 @@ public class Simulator implements SimulationController {
         this.updateAllNodes();
     }
 
-    protected void transmitMessage(MessageTransmission tx) {
-        Set<MessageDeliveryEvent> messageDeliveryEvents = getNetwork().generateMessageDeliveries(getContext(), tx);
-        this.logger.logMessageTransmitted(context, tx);
+    protected void transmitMessage(Message msg) {
+        Set<MessageDeliveryEvent> messageDeliveryEvents = getNetwork().generateMessageDeliveries(getContext(), msg);
+        this.logger.logMessageTransmitted(context, msg);
 
         messageQueue.addAll(messageDeliveryEvents);
         for (MessageDeliveryEvent x : messageDeliveryEvents)

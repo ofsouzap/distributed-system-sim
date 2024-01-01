@@ -1,8 +1,9 @@
 package com.github.ofsouzap.distributedsystemsim.examples.basicExample.nodes;
 
-import com.github.ofsouzap.distributedsystemsim.simulation.MessageTransmission;
+import com.github.ofsouzap.distributedsystemsim.examples.basicExample.StringMessage;
 import com.github.ofsouzap.distributedsystemsim.simulation.SimulationContext;
 import com.github.ofsouzap.distributedsystemsim.simulation.messages.Message;
+import com.github.ofsouzap.distributedsystemsim.simulation.messages.targets.BroadcastTarget;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.Node;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.UpdateIntent;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.behaviours.NodeBehaviour;
@@ -10,12 +11,12 @@ import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.behavio
 public class TimedBroadcastNode implements Node {
     protected final NodeBehaviour nodeBehaviour;
     protected final Integer sendTime;
-    protected final Message msg;
+    protected final String msgContent;
 
-    public TimedBroadcastNode(Integer sendTime, Message msg) {
+    public TimedBroadcastNode(Integer sendTime, String msgContent) {
         this.nodeBehaviour = new NiceNodeBehaviour();
         this.sendTime = sendTime;
-        this.msg = msg;
+        this.msgContent = msgContent;
     }
 
     @Override
@@ -29,7 +30,7 @@ public class TimedBroadcastNode implements Node {
         UpdateIntent intent = new UpdateIntent();
 
         if (context.getTime() == sendTime) {
-            intent.messageTransmissions.add(new MessageTransmission(this, msg));
+            intent.messagesToSend.add(new StringMessage(this, new BroadcastTarget(), msgContent));
         }
 
         return intent;

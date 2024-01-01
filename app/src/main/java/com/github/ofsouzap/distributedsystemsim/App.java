@@ -3,7 +3,6 @@
  */
 package com.github.ofsouzap.distributedsystemsim;
 
-import com.github.ofsouzap.distributedsystemsim.examples.basicExample.StringMessage;
 import com.github.ofsouzap.distributedsystemsim.examples.basicExample.network.BasicNetwork;
 import com.github.ofsouzap.distributedsystemsim.examples.basicExample.nodes.NullNode;
 import com.github.ofsouzap.distributedsystemsim.examples.basicExample.nodes.TimedBroadcastNode;
@@ -22,8 +21,8 @@ public class App {
 
         // Create network
         Network network = new BasicNetwork();
-        network.addNode(new TimedBroadcastNode(1, new StringMessage("message1")));
-        network.addNode(new TimedBroadcastNode(5, new StringMessage("message2")));
+        network.addNode(new TimedBroadcastNode(1, "message1"));
+        network.addNode(new TimedBroadcastNode(5, "message2"));
         network.addNode(new NullNode());
 
         // Create simulator

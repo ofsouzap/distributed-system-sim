@@ -3,18 +3,18 @@ package com.github.ofsouzap.distributedsystemsim.simulation.network.nodes;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.ofsouzap.distributedsystemsim.simulation.MessageTransmission;
+import com.github.ofsouzap.distributedsystemsim.simulation.messages.Message;
 
 public class UpdateIntent {
-    public Set<MessageTransmission> messageTransmissions;
+    public Set<Message> messagesToSend;
 
     public UpdateIntent() {
-        this.messageTransmissions = new HashSet<>();
+        this.messagesToSend = new HashSet<>();
     }
 
-    public UpdateIntent(Set<MessageTransmission> messageTransmissions) {
-        this.messageTransmissions = messageTransmissions;
+    public UpdateIntent(Set<Message> messageTransmissions) {
+        this.messagesToSend = messageTransmissions;
     }
 
-    public Set<MessageTransmission> getMessageTransmissions() { return messageTransmissions; }
+    public Set<Message> getMessagesToSend() { return messagesToSend; }
 }
