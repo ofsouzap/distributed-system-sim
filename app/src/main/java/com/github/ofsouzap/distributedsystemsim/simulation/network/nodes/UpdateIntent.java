@@ -6,10 +6,14 @@ import java.util.Set;
 import com.github.ofsouzap.distributedsystemsim.simulation.messages.Message;
 
 public class UpdateIntent {
-    public Set<Message> messagesToSend;
+    public final Set<Message> messagesToSend;
+
+    public static UpdateIntent emptyIntent() {
+        return new UpdateIntent();
+    }
 
     public UpdateIntent() {
-        this.messagesToSend = new HashSet<>();
+        this(new HashSet<>());
     }
 
     public UpdateIntent(Set<Message> messageTransmissions) {

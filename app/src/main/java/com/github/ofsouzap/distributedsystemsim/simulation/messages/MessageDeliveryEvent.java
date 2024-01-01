@@ -4,13 +4,12 @@ import com.github.ofsouzap.distributedsystemsim.simulation.messages.targets.Mess
 
 public class MessageDeliveryEvent {
     protected Integer deliveryTime;
-    /** The intended target of the message. This could differ from the actual target due to message loss/alteration */
-    protected MessageTarget intendedTarget;
+    protected MessageTarget target;
     protected Message message;
 
     public MessageDeliveryEvent(Integer deliveryTime, MessageTarget intendedTarget, Message message) {
         this.deliveryTime = deliveryTime;
-        this.intendedTarget = intendedTarget;
+        this.target = intendedTarget;
         this.message = message;
     }
 
@@ -18,8 +17,8 @@ public class MessageDeliveryEvent {
         return deliveryTime;
     }
 
-    public MessageTarget getIntendedTarget() {
-        return intendedTarget;
+    public MessageTarget getTarget() {
+        return target;
     }
 
     public Message getMessage() {

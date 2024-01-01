@@ -42,9 +42,9 @@ public class Simulator implements SimulationController {
         while (!messageQueue.isEmpty() && messageQueue.peek().getDeliveryTime() == getContext().getTime()) {
             MessageDeliveryEvent messageDelivery = messageQueue.remove(); // Remove the delivery event item
 
-            messageDelivery.getIntendedTarget().deliverMessage(network, messageDelivery.getMessage());
+            messageDelivery.getTarget().deliverMessage(network, messageDelivery.getMessage());
 
-            this.logger.logMessageDelivered(context, messageDelivery.getIntendedTarget(), messageDelivery.getMessage());
+            this.logger.logMessageDelivered(context, messageDelivery.getTarget(), messageDelivery.getMessage());
         }
     }
 

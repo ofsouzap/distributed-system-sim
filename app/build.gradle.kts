@@ -20,6 +20,9 @@ dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
 
+    // Use Hamcrest matchers for testing.
+    testImplementation("org.hamcrest:hamcrest:2.2")
+
     // This dependency is used by the application.
     implementation("com.google.guava:guava:31.1-jre")
 }

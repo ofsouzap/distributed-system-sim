@@ -1,4 +1,4 @@
-package com.github.ofsouzap.distributedsystemsim.examples.basicExample;
+package com.github.ofsouzap.distributedsystemsim.testUtils;
 
 import com.github.ofsouzap.distributedsystemsim.simulation.messages.Message;
 import com.github.ofsouzap.distributedsystemsim.simulation.messages.targets.MessageTarget;
@@ -28,5 +28,9 @@ public class StringMessage implements Message {
     @Override
     public MessageTarget getIntendedTarget() {
         return intendedTarget;
+    }
+
+    public String getContent() {
+        return content;
     }
 }

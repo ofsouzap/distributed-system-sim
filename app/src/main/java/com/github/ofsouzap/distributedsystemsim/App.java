@@ -3,7 +3,6 @@
  */
 package com.github.ofsouzap.distributedsystemsim;
 
-import com.github.ofsouzap.distributedsystemsim.examples.basicExample.network.BasicNetwork;
 import com.github.ofsouzap.distributedsystemsim.examples.basicExample.nodes.NullNode;
 import com.github.ofsouzap.distributedsystemsim.examples.basicExample.nodes.TimedBroadcastNode;
 import com.github.ofsouzap.distributedsystemsim.simulation.SimulationController;
@@ -11,6 +10,7 @@ import com.github.ofsouzap.distributedsystemsim.simulation.Simulator;
 import com.github.ofsouzap.distributedsystemsim.simulation.logging.ConsoleLogger;
 import com.github.ofsouzap.distributedsystemsim.simulation.logging.EventLogger;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.Network;
+import com.github.ofsouzap.distributedsystemsim.simulation.network.ReliableNetwork;
 
 public class App {
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class App {
         EventLogger logger = new ConsoleLogger();
 
         // Create network
-        Network network = new BasicNetwork();
+        Network network = new ReliableNetwork();
         network.addNode(new TimedBroadcastNode(1, "message1"));
         network.addNode(new TimedBroadcastNode(5, "message2"));
         network.addNode(new NullNode());

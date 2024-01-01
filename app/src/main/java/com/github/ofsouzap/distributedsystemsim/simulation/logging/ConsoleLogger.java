@@ -23,7 +23,7 @@ public class ConsoleLogger implements EventLogger {
         + " of message ["
         + messageDelivery.getMessage().toString()
         + "] to node ["
-        + messageDelivery.getIntendedTarget().toString()
+        + messageDelivery.getTarget().toString()
         + "]");
     }
 

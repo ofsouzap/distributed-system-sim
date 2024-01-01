@@ -6,6 +6,7 @@ import com.github.ofsouzap.distributedsystemsim.simulation.messages.Message;
 import com.github.ofsouzap.distributedsystemsim.simulation.messages.targets.BroadcastTarget;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.Node;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.UpdateIntent;
+import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.behaviours.CrashStopNodeBehvaiour;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.behaviours.NodeBehaviour;
 
 public class TimedBroadcastNode implements Node {
@@ -14,7 +15,7 @@ public class TimedBroadcastNode implements Node {
     protected final String msgContent;
 
     public TimedBroadcastNode(Integer sendTime, String msgContent) {
-        this.nodeBehaviour = new NiceNodeBehaviour();
+        this.nodeBehaviour = new CrashStopNodeBehvaiour();
         this.sendTime = sendTime;
         this.msgContent = msgContent;
     }
