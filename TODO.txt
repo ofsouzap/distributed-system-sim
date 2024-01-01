@@ -1,28 +1,42 @@
 - Run tests in workflow
 - Simulator
     / Simulator class
+        - Basic tests
     / Message transmission
         Don't use raw bytes, simplify by wrapping in objects and allow receivers to pattern match them (or something like that)
     - Nodes and algorithms for nodes to execute
         Should this be two separate things or should I keep them as linked ideas
     / Logging
+        - Tests
     - Network behaviours
-        - Reliable links - message received iff it is sent. Might be reordered
-        - Fair-loss links - messages might be lost, duplicated or reordered but will eventually get through
+        / Reliable links - message received iff it is sent. Might be reordered
+            / Tests
+        / Fair-loss links - messages might be lost, duplicated or reordered but will eventually get through
+            - Tests
         - Arbitrary links - messages might be altered
     - Node behaviours
         - Crash-stop
+            - Tests
         - Crash-recovery
+            - Tests
     - Timing behaviours for messages
         - Synchronous - latency no greater than known upper bound
+            - Tests
         - Partially-synchronous - can become asynchronous for finite but unknown periods of time
+            - Tests
         - Asynchronous - may be delayed for arbitrarily long
+            - Tests
     - Timing behaviours for node execution
         - Synchronous - nodes execute at known speed
+            - Tests
         - Partially-synchronous - can become asynchronous for finite but unknown periods of time
+            - Tests
         - Asynchronous - execution may be paused for arbitrarily long
+            - Tests
 - Speeding-up and slowing-down simulation
     Don't use real time, have a virtual time thing
 - Example distributed database system
+    - Tests
 - Raft algorithm
+    - Tests
 - Graphical interface? (probably not)
