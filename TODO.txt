@@ -1,4 +1,3 @@
-- Run tests in workflow
 - Simulator
     / Simulator class
         - Basic tests
@@ -15,17 +14,17 @@
             / Tests
         - Arbitrary links - messages might be altered
             - Tests
-    - Node behaviours
-        - Crash-stop
-            - Tests
-        - Crash-recovery
-            - Tests
     - Timing behaviours for messages
         - Synchronous - latency no greater than known upper bound
             - Tests
         - Partially-synchronous - can become asynchronous for finite but unknown periods of time
             - Tests
         - Asynchronous - may be delayed for arbitrarily long
+            - Tests
+    - Node behaviours
+        - Crash-stop
+            - Tests
+        - Crash-recovery
             - Tests
     - Timing behaviours for node execution
         - Synchronous - nodes execute at known speed
@@ -34,8 +33,6 @@
             - Tests
         - Asynchronous - execution may be paused for arbitrarily long
             - Tests
-- Speeding-up and slowing-down simulation
-    Don't use real time, have a virtual time thing
 - Example distributed database system
     - Tests
 - Raft algorithm
