@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.github.ofsouzap.distributedsystemsim.simulation.SimulationContext;
@@ -21,14 +22,22 @@ import com.github.ofsouzap.distributedsystemsim.testUtils.StaticSimulationContex
 import com.github.ofsouzap.distributedsystemsim.testUtils.StringMessage;
 
 class ReliableNetworkLinkTest {
-    @Test void generateSingleMessageDeliveries_deliveryExists() {
-        // Arrange
-        NetworkLink link = new ReliableNetworkLink();
-        Network net = new SimpleNetwork(link);
-        Node n1 = new SimpleNode();
-        net.addNode(n1);
-        SimulationContext context = new StaticSimulationContext();
+    private NetworkLink link;
+    private Network net;
+    private Node n1;
+    private SimulationContext context;
 
+    @BeforeEach void basicSetup() {
+        link = new ReliableNetworkLink();
+        net = new SimpleNetwork(link);
+
+        n1 = new SimpleNode();
+        net.addNode(n1);
+
+        context = new StaticSimulationContext();
+    }
+
+    @Test void generateSingleMessageDeliveries_deliveryExists() {
         // Act
         Set<MessageDeliveryEvent> outs = net.generateMessageDeliveries(context, new StringMessage(n1, new BroadcastTarget(), "message1"));
 
@@ -42,13 +51,6 @@ class ReliableNetworkLinkTest {
 
     @Test void generateManyMessageDeliveries_correctNumberOfDeliveries() {
         final int N = 100;
-
-        // Arrange
-        NetworkLink link = new ReliableNetworkLink();
-        Network net = new SimpleNetwork(link);
-        Node n1 = new SimpleNode();
-        net.addNode(n1);
-        SimulationContext context = new StaticSimulationContext();
 
         // Act
 

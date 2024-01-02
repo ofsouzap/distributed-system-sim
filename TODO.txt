@@ -12,8 +12,9 @@
         / Reliable links - message received iff it is sent. Might be reordered
             / Tests
         / Fair-loss links - messages might be lost, duplicated or reordered but will eventually get through
-            - Tests
+            / Tests
         - Arbitrary links - messages might be altered
+            - Tests
     - Node behaviours
         - Crash-stop
             - Tests

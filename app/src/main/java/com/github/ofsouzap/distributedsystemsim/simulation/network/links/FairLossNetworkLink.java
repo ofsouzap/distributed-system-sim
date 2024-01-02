@@ -21,6 +21,11 @@ public class FairLossNetworkLink implements NetworkLink {
     protected final int messageDuplicateChance;
 
     public FairLossNetworkLink(Integer messageNoInterferenceChance, Integer messageLossChance, Integer messageDuplicateChance) {
+        if (messageNoInterferenceChance < 0 || messageLossChance < 0 || messageDuplicateChance < 0)
+            throw new IllegalArgumentException("Chances must be non-negative");
+        if (messageNoInterferenceChance + messageLossChance + messageDuplicateChance <= 0)
+            throw new IllegalArgumentException("Must have at least one positive chance");
+
         this.messageNoInterferenceChance = (messageNoInterferenceChance != null) ? messageNoInterferenceChance : defaultMessageNoInterferenceChance;
         this.messageLossChance = (messageLossChance != null) ? messageLossChance : defaultMessageLossChance;
         this.messageDuplicateChance = (messageDuplicateChance != null) ? messageDuplicateChance : defaultMessageDuplicateChance;
@@ -52,7 +57,7 @@ public class FairLossNetworkLink implements NetworkLink {
     }
 
     protected int getTotalChanceVal() {
-        return messageDuplicateChance + messageLossChance + messageDuplicateChance;
+        return getMessageNoInterferenceChance() + getMessageLossChance() + getMessageDuplicateChance();
     }
 
     /** Apply duplication and loss effects to a single message using weighted probabilities */
