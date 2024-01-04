@@ -14,13 +14,11 @@
             / Tests
         - Arbitrary links - messages might be altered
             - Tests
-    - Timing behaviours for messages
-        - Synchronous - latency no greater than known upper bound
-            - Tests
-        - Partially-synchronous - can become asynchronous for finite but unknown periods of time
-            - Tests
-        - Asynchronous - may be delayed for arbitrarily long
-            - Tests
+    / Timing behaviours for messages
+        / Synchronous - latency no greater than known upper bound
+            / Tests
+        / Partially-synchronous - can become asynchronous for finite but unknown periods of time
+            / Tests
     - Node behaviours
         - Crash-stop
             - Tests

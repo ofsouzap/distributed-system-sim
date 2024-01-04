@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import com.github.ofsouzap.distributedsystemsim.simulation.Simulator;
 import com.github.ofsouzap.distributedsystemsim.simulation.logging.NullLogger;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.Network;
-import com.github.ofsouzap.distributedsystemsim.simulation.network.ReliableNetwork;
+import com.github.ofsouzap.distributedsystemsim.simulation.network.ReliableSynchronousNetwork;
 
 class SimulatorTest {
     @Test void simulatorStep() {
-        Network net = new ReliableNetwork();
+        Network net = new ReliableSynchronousNetwork();
         Simulator sim = new Simulator(new NullLogger(), net);
         sim.step();
     }

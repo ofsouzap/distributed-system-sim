@@ -10,7 +10,7 @@ import com.github.ofsouzap.distributedsystemsim.simulation.Simulator;
 import com.github.ofsouzap.distributedsystemsim.simulation.logging.ConsoleLogger;
 import com.github.ofsouzap.distributedsystemsim.simulation.logging.EventLogger;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.Network;
-import com.github.ofsouzap.distributedsystemsim.simulation.network.ReliableNetwork;
+import com.github.ofsouzap.distributedsystemsim.simulation.network.ReliableSynchronousNetwork;
 
 public class App {
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class App {
         EventLogger logger = new ConsoleLogger();
 
         // Create network
-        Network network = new ReliableNetwork();
+        Network network = new ReliableSynchronousNetwork();
         network.addNode(new TimedBroadcastNode(1, "message1"));
         network.addNode(new TimedBroadcastNode(5, "message2"));
         network.addNode(new NullNode());

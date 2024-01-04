@@ -18,6 +18,7 @@ import com.github.ofsouzap.distributedsystemsim.simulation.messages.targets.Broa
 import com.github.ofsouzap.distributedsystemsim.simulation.network.Network;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.links.FairLossNetworkLink;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.links.NetworkLink;
+import com.github.ofsouzap.distributedsystemsim.simulation.network.links.linkTimingBehaviour.SynchronousTimingBehaviour;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.Node;
 import com.github.ofsouzap.distributedsystemsim.testUtils.SimpleNetwork;
 import com.github.ofsouzap.distributedsystemsim.testUtils.SimpleNode;
@@ -35,13 +36,13 @@ class FairLossNetworkLinkTest {
     private SimulationContext context;
 
     @BeforeEach void basicSetup() {
-        neverInterfereLink = new FairLossNetworkLink(1, 0, 0);
+        neverInterfereLink = new FairLossNetworkLink(new SynchronousTimingBehaviour(1), 1, 0, 0);
         neverInterfereNet = new SimpleNetwork(neverInterfereLink);
 
-        alwaysLoseLink = new FairLossNetworkLink(0, 1, 0);
+        alwaysLoseLink = new FairLossNetworkLink(new SynchronousTimingBehaviour(1), 0, 1, 0);
         alwaysLoseNet = new SimpleNetwork(alwaysLoseLink);
 
-        sometimesDuplicateLink = new FairLossNetworkLink(1, 0, 1);
+        sometimesDuplicateLink = new FairLossNetworkLink(new SynchronousTimingBehaviour(1), 1, 0, 1);
         sometimesDuplicateNet = new SimpleNetwork(sometimesDuplicateLink);
 
         n1 = new SimpleNode();

@@ -10,29 +10,37 @@ import java.util.stream.Collectors;
 import com.github.ofsouzap.distributedsystemsim.simulation.SimulationContext;
 import com.github.ofsouzap.distributedsystemsim.simulation.messages.Message;
 import com.github.ofsouzap.distributedsystemsim.simulation.messages.MessageDeliveryEvent;
+import com.github.ofsouzap.distributedsystemsim.simulation.network.links.linkTimingBehaviour.LinkTimingBehaviour;
 
 public class FairLossNetworkLink implements NetworkLink {
     public static final int defaultMessageNoInterferenceChance = 8;
     public static final int defaultMessageLossChance = 3;
     public static final int defaultMessageDuplicateChance = 1;
 
+    protected final LinkTimingBehaviour timingBehaviour;
     protected final int messageNoInterferenceChance;
     protected final int messageLossChance;
     protected final int messageDuplicateChance;
 
-    public FairLossNetworkLink(Integer messageNoInterferenceChance, Integer messageLossChance, Integer messageDuplicateChance) {
+    public FairLossNetworkLink(LinkTimingBehaviour timingBehaviour, Integer messageNoInterferenceChance, Integer messageLossChance, Integer messageDuplicateChance) {
         if (messageNoInterferenceChance < 0 || messageLossChance < 0 || messageDuplicateChance < 0)
             throw new IllegalArgumentException("Chances must be non-negative");
         if (messageNoInterferenceChance + messageLossChance + messageDuplicateChance <= 0)
             throw new IllegalArgumentException("Must have at least one positive chance");
 
+        this.timingBehaviour = timingBehaviour;
         this.messageNoInterferenceChance = (messageNoInterferenceChance != null) ? messageNoInterferenceChance : defaultMessageNoInterferenceChance;
         this.messageLossChance = (messageLossChance != null) ? messageLossChance : defaultMessageLossChance;
         this.messageDuplicateChance = (messageDuplicateChance != null) ? messageDuplicateChance : defaultMessageDuplicateChance;
     }
 
-    public FairLossNetworkLink() {
-        this(null, null, null);
+    public FairLossNetworkLink(LinkTimingBehaviour timingBehaviour) {
+        this(timingBehaviour, null, null, null);
+    }
+
+    @Override
+    public LinkTimingBehaviour getTimingBehaviour() {
+        return timingBehaviour;
     }
 
     /** Chance of a messsage not being altered.
@@ -87,12 +95,12 @@ public class FairLossNetworkLink implements NetworkLink {
 
     @Override
     public Set<MessageDeliveryEvent> generateMessageDeliveries(SimulationContext context, Message msg) {
-        // TODO - when network timing behaviours implemented, have delivery of messages delayed as needed
+        Integer deliveryTime = getTimingBehaviour().generateDeliveryTime(context);
         return applyEffectsByChance(msg)
             .stream()
             .map(new Function<Message, MessageDeliveryEvent>() {
                 public MessageDeliveryEvent apply(Message x) {
-                    return new MessageDeliveryEvent(context.getTime() + 1, x.getIntendedTarget(), x);
+                    return new MessageDeliveryEvent(deliveryTime, x.getIntendedTarget(), x);
                 };
             })
             .collect(Collectors.toSet());

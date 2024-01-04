@@ -5,14 +5,15 @@ import java.util.Set;
 
 import com.github.ofsouzap.distributedsystemsim.simulation.network.links.NetworkLink;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.links.ReliableNetworkLink;
+import com.github.ofsouzap.distributedsystemsim.simulation.network.links.linkTimingBehaviour.SynchronousTimingBehaviour;
 import com.github.ofsouzap.distributedsystemsim.simulation.network.nodes.Node;
 
-public class ReliableNetwork implements Network {
+public class ReliableSynchronousNetwork implements Network {
     protected NetworkLink networkLink;
     protected Set<Node> nodes;
 
-    public ReliableNetwork() {
-        this.networkLink = new ReliableNetworkLink();
+    public ReliableSynchronousNetwork() {
+        this.networkLink = new ReliableNetworkLink(new SynchronousTimingBehaviour());
         this.nodes = new HashSet<>();
     }
     @Override
