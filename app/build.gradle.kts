@@ -29,7 +29,11 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("com.github.ofsouzap.distributedsystemsim.App")
+    mainClass.set("com.github.ofsouzap.distributedsystemsim.examples.App")
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
 
 tasks.named<Test>("test") {

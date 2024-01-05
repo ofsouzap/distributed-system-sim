@@ -12,6 +12,10 @@ public class UpdateIntent {
         return new UpdateIntent();
     }
 
+    public static UpdateIntent sendMessagesIntent(Set<Message> msgs) {
+        return new UpdateIntent(msgs);
+    }
+
     public UpdateIntent() {
         this(new HashSet<>());
     }
